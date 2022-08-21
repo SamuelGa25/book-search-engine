@@ -23,7 +23,7 @@
 
   ## Contact Information:
   - UserName: [samuelga25]
-  - Github: [book-search-engine](https://github.com/book-search-engine)
+  - Github: [samuelga25](https://github.com/samuelga25)
   - Email: [samuelgarenas@gmail.com]
 
   ## License
