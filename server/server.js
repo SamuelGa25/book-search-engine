@@ -3,12 +3,10 @@ const path = require('path');
 
 const {ApolloServer} = require ('apollo-server-express');
 const {authMiddleware} = require('./utils/auth');
-const {typeDefs} = require('./schemas/typeDefs');
-const {resolvers} = require('./schemas/resolvers');
-
+const {typeDefs, resolvers} = require('./schemas');
 
 const db = require('./config/connection');
-const { type } = require('os');
+
 const PORT = process.env.PORT || 3001;
 
 const server = new ApolloServer({
@@ -35,7 +33,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-const startApolloServer = async () => {
+const startApolloServer = async (typeDefs, resolvers) => {
     await server.start(); 
     server.applyMiddleware({app})
 

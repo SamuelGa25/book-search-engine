@@ -1,5 +1,5 @@
 // see SignupForm.js for comments
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 
 // import { loginUser } from '../utils/API';
@@ -20,6 +20,15 @@ const LoginForm = () => {
   //to store the new user once it logs in 
   const [login, {error} ]= useMutation(LOGIN_USER);
 
+  useEffect(() =>{
+    if(error){
+      setShowAlert(true);
+    }else{
+      setShowAlert(false);
+
+    }
+  }, [error]);
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
@@ -27,35 +36,21 @@ const LoginForm = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-
+    console.log("handleFormSubmit")
     // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
     }
-
     try {
       //obtaining the data of login 
+      const {data} = await login({variables: {...userFormData},});
 
-      const {response} = await login(
-        {
-          variables: {...userFormData},
-        }
-      );
-
-      Auth.login(response.login.token)
-      // const response = await loginUser(userFormData);
-      // if (!response.ok) {
-      //   throw new Error('something went wrong!');
-      // }
-      // const { token, user } = await response.json();
-      // console.log(user);
-    
+      console.log(data);
+      Auth.login(data.login.token)    
     } catch (err) {
-      console.error(err);
-      console.log(error);//checking the error
-      setShowAlert(true);
+      console.error(err);//checking the error
     }
     setUserFormData({
       username: '',
@@ -96,7 +91,8 @@ const LoginForm = () => {
           <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
         </Form.Group>
         <Button
-          disabled={!(userFormData.email && userFormData.password)}
+          // disabled={!(userFormData.email && userFormData.password)}
+          onClick={()=>{console.log("login submit")}}
           type='submit'
           variant='success'>
           Submit

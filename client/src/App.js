@@ -6,11 +6,9 @@ import Navbar from './components/Navbar';
 
 import {setContext} from '@apollo/client/link/context'
 //need to import apolloprovider to in order to use the functionality
-import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink, HttpLink } from '@apollo/client';
+import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 
-function App() {
-
-  //link to the apollo server
+//link to the apollo server
   const HttpLink = createHttpLink({
     uri: 'graphql',
   });
@@ -33,16 +31,7 @@ function App() {
     cache:  new InMemoryCache()
   });
 
-
-
-
-
-
-
-
-
-
-
+function App() {
 
   return (
 
