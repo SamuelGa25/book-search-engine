@@ -11,7 +11,7 @@
   AS AN avid reader I WANT to search for new books to read SO THAT I can keep a list of books to purchase
   ## Installation
     I had some issues with the client folder so I made a copy. 
-  It's run in two different terminals, after installing all dependencies, 
+  It's running two different terminals, after installing all dependencies, 
   open two terminals one for client copy and the other one for server 
 
   To run it do npm run watch for server and for client do npm start, 
